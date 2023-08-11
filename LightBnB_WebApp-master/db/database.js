@@ -128,24 +128,24 @@ const getAllProperties = function (options, limit = 10) {
     queryParams.push(`${options.owner_id}`)
     queryString += `AND owner_id = $${queryParams.length}`;
   }
+  // const result = []; result.push(1) result.push(2)
+//result = 1, 2
+if (options.minimum_price_per_night && options.maximum_price_per_night) {
+  queryParams.push(options.minimum_price_per_night * 100)
+  queryParams.push(options.maximum_price_per_night * 100);
+  queryString += ` AND (cost_per_night >= $${queryParams.length - 1} AND cost_per_night <= $${queryParams.length} )`;
+}
 
-  // 4
-
+  queryString += `
+  GROUP BY properties.id`
   if (options.minimum_rating) {
     queryParams.push(`${options.minimum_rating}`);
     queryString += ` HAVING AVG(rating) >= $${queryParams.length}`;
   }
-// const result = []; result.push(1) result.push(2)
-//result = 1, 2
-  if (options.minimum_price_per_night && options.maximum_price_per_night) {
-    queryParams.push(options.minimum_price_per_night * 100)
-    queryParams.push(options.maximum_price_per_night * 100);
-    queryString += ` AND (cost_per_night >= $${queryParams.length - 1} AND cost_per_night <= $${queryParams.length} )`;
-}
+
   queryParams.push(limit);
-  queryString += `
-  GROUP BY properties.id
-   ORDER BY cost_per_night
+  queryString +=
+  ` ORDER BY cost_per_night
   LIMIT $${queryParams.length};
   `;
 

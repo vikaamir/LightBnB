@@ -1,4 +1,9 @@
 # LightBnB
+The LightBnB app can assist you in finding your next accommodation based on your travel itinerary.
+
+# screenshots
+!['bnb](./screenShots/bnb.png)
+!['bnb2](./screenShots/bnb2.png)
 
 ## Project Structure
 
@@ -53,3 +58,9 @@
 * `routes` contains the router files which are responsible for any HTTP requests to `/users/something` or `/api/something`. 
 * `styles` contains all of the sass files. 
 * `server.js` is the entry point to the application. This connects the routes to the database.
+
+
+1. Login to your profile
+2. you can find you previous ressrvation 
+3. You can add new proprty
+4. The functions run with SQL
